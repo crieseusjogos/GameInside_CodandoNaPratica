@@ -11,7 +11,7 @@ public class PlayerMoviment : MonoBehaviour
     [SerializeField] private float speed;
 
 
-    public int MyProperty { get; set; }
+   
 
     private void Awake()
     {
@@ -35,6 +35,9 @@ public class PlayerMoviment : MonoBehaviour
         Movement();
     }
 
+
+    #region Moviment
+
     public void OnMove(float direction)
     {
         float currentSpeed = speed;
@@ -47,5 +50,7 @@ public class PlayerMoviment : MonoBehaviour
     {
         rig.velocity = newMoviment;
     }
+    #endregion
 
-   }
+
+}

@@ -8,10 +8,15 @@ public class PlayerInput : MonoBehaviour
 
     private float horizontal = 0f;
 
+    private void Awake()
+    {
+        playerMoviment = GetComponent<PlayerMoviment>();
+    } 
+
     // Start is called before the first frame update
     void Start()
     {
-        playerMoviment = GetComponent<PlayerMoviment>();
+      
     }
 
     // Update is called once per frame
@@ -20,10 +25,9 @@ public class PlayerInput : MonoBehaviour
         GetMovimentInput();
    
     }
-    private void FixedUpdate()
-    {
-      
-    }
+ 
+
+
 
     void GetMovimentInput()
     {
