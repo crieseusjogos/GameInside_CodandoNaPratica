@@ -6,7 +6,7 @@ public class PlayerInput : MonoBehaviour
 {
     private PlayerMoviment playerMoviment;
 
-    private float horizontal = 0f;
+
 
     private void Awake()
     {
@@ -23,7 +23,6 @@ public class PlayerInput : MonoBehaviour
     void Update()
     {
         GetMovimentInput();
-   
     }
  
 

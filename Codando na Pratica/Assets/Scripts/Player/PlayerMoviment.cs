@@ -9,8 +9,6 @@ public class PlayerMoviment : MonoBehaviour
 
     [Header("Moviment:")]
     [SerializeField] private float speed;
-
-
    
 
     private void Awake()
@@ -50,6 +48,7 @@ public class PlayerMoviment : MonoBehaviour
     {
         rig.velocity = newMoviment;
     }
+
     #endregion
 
 
