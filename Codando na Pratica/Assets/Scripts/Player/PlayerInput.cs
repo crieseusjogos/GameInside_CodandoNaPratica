@@ -23,6 +23,7 @@ public class PlayerInput : MonoBehaviour
     void Update()
     {
         GetMovimentInput();
+        GetJumpInput();
     }
  
 
@@ -33,7 +34,13 @@ public class PlayerInput : MonoBehaviour
         playerMoviment.OnMove(Input.GetAxisRaw("Horizontal"));
     }
 
-
+    void GetJumpInput()
+    {
+        if( Input.GetButtonDown("Jump"))
+        {
+            playerMoviment.SetJump();
+        }
+    }
 
 
 }
