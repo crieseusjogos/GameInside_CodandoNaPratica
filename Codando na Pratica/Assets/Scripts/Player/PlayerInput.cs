@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerInput : MonoBehaviour
 {
     private PlayerMoviment playerMoviment;
+    private PlayerAttack playerAttack;
 
+    private bool _isAttack;
+
+    public bool isAttack { get => _isAttack; set => _isAttack = value; }
 
 
     private void Awake()
     {
         playerMoviment = GetComponent<PlayerMoviment>();
+        playerAttack = GetComponent<PlayerAttack>();
     } 
 
     // Start is called before the first frame update
@@ -24,6 +30,7 @@ public class PlayerInput : MonoBehaviour
     {
         GetMovimentInput();
         GetJumpInput();
+        GetAttackInput();
     }
  
 
@@ -31,6 +38,9 @@ public class PlayerInput : MonoBehaviour
 
     void GetMovimentInput()
     {
+        if (isAttack)
+            return;
+
         playerMoviment.OnMove(Input.GetAxisRaw("Horizontal"));
     }
 
@@ -41,6 +51,16 @@ public class PlayerInput : MonoBehaviour
             playerMoviment.SetJump();
         }
     }
+
+    void GetAttackInput()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            playerAttack.Attack();
+        }
+    }
+
+
 
 
 }

@@ -18,6 +18,8 @@ public class PlayerMoviment : MonoBehaviour
     private bool doubleJump;
     private int extraJump;
 
+    private bool canControl = true;
+
 
 
    [SerializeField] private int nextJump;
@@ -50,12 +52,18 @@ public class PlayerMoviment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!canControl)
+            return;
+
         ResetExtraJump();
         SetJumpAnim();
     }
 
     private void FixedUpdate()
     {
+        if (!canControl)
+            return;
+
         Movement();
         CheckGround();
         Jump();
@@ -149,6 +157,25 @@ public class PlayerMoviment : MonoBehaviour
             extraJump = nextJump;
         }
     }
+
+
+
+    public void EnabledControls()
+    {
+        canControl = true;
+    }
+
+    public void DisableControls()
+    {
+        canControl = false;
+
+        if(onGround)
+        {
+            rig.velocity = Vector2.zero;
+        }
+    }
+
+
 
 
 }
