@@ -19,7 +19,7 @@ public class PlayerMoviment : MonoBehaviour
     private int extraJump;
 
     private bool canControl = true;
-
+    
 
 
    [SerializeField] private int nextJump;
@@ -152,6 +152,8 @@ public class PlayerMoviment : MonoBehaviour
 
     void ResetExtraJump()
     {
+        playerAnimation.SetOnGround(onGround);
+
         if(onGround)
         {
             extraJump = nextJump;

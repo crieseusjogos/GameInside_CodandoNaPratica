@@ -56,7 +56,7 @@ public class PlayerInput : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            playerAttack.Attack();
+            playerAttack.SetAttack();
         }
     }
 

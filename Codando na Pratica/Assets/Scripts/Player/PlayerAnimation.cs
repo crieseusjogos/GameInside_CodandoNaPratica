@@ -2,20 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof (Animator))]
+
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] private Animator anim;
 
     private void Awake()
     {
-        //anim = GetComponentInChildren<Animator>();
+        anim = GetComponentInChildren<Animator>();
         
     }
 
     public void SetMovementDirection(int direction)
     {
         anim.SetInteger("transition", direction);
+    }
+
+    public void SetOnGround(bool onGround)
+    {
+        anim.SetBool("onGround", onGround);
     }
 
      
@@ -29,7 +34,7 @@ public class PlayerAnimation : MonoBehaviour
         {
             anim.Play("Player_Attack2", -1);
         }
-        else if (attackNumber > 70)
+        else if (attackNumber >= 70)
         {
             anim.Play("Player_Attack3", -1);
         }

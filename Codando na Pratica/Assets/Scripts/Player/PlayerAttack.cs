@@ -22,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
 
-    public void Attack()
+    public void SetAttack()
     {
         if(canAttack)
         {
