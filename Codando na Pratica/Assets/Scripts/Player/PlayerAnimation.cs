@@ -40,4 +40,15 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+
+    public void SetHit()
+    {
+        anim.Play("Player_Hit", -1);
+    }
+
+    public void SetDeath()
+    {
+        anim.Play("Player_Death", -1);
+    }
+
 }

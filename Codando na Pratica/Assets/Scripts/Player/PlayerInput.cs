@@ -9,9 +9,10 @@ public class PlayerInput : MonoBehaviour
     private PlayerAttack playerAttack;
 
     private bool _isAttack;
+    private bool _isDead;
 
     public bool isAttack { get => _isAttack; set => _isAttack = value; }
-
+    public bool isDead { get => _isDead; set => _isDead = value; }
 
     private void Awake()
     {
@@ -38,7 +39,7 @@ public class PlayerInput : MonoBehaviour
 
     void GetMovimentInput()
     {
-        if (isAttack)
+        if (isAttack || isDead)
             return;
 
         playerMoviment.OnMove(Input.GetAxisRaw("Horizontal"));
