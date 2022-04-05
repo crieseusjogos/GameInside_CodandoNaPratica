@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 313e9d5f51bd17c4e966d7372c932b4e
+guid: 331d227039aee7745a95a6c26dc12169
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Big_bloated_attack1_0
+      name: Acid Explosion_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 72
-        height: 72
+        width: 46
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98ecfeb0423187c4ab71494cb5c90bc4
-      internalID: -1334783712
+      spriteID: ffeb1bed8a69a5d4c817cb96e8d23f10
+      internalID: 1640234489
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Big_bloated_attack1_1
+      name: Acid Explosion_1
       rect:
         serializedVersion: 2
-        x: 72
+        x: 46
         y: 0
-        width: 72
-        height: 72
+        width: 46
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 883e6030bbc9034439df83e2efb32982
-      internalID: -1318602710
+      spriteID: 3f1ef9034f01243478889ac25990742d
+      internalID: -1557396139
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Big_bloated_attack1_2
+      name: Acid Explosion_2
       rect:
         serializedVersion: 2
-        x: 144
+        x: 92
         y: 0
-        width: 72
-        height: 72
+        width: 46
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f96d911bd69d3e144bf1ee6234ef62a8
-      internalID: 1454323305
+      spriteID: d9a4eb4075816b14bae3b10509d62a8f
+      internalID: -967756855
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Big_bloated_attack1_3
+      name: Acid Explosion_3
       rect:
         serializedVersion: 2
-        x: 216
+        x: 138
         y: 0
-        width: 72
-        height: 72
+        width: 46
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a302ac7f023d7645a3150b511a034d3
-      internalID: -416202505
+      spriteID: 2ec7f3a8de7f5c749895dbcf6c8a3704
+      internalID: -1004108292
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Big_bloated_attack1_4
+      name: Acid Explosion_4
       rect:
         serializedVersion: 2
-        x: 288
+        x: 184
         y: 0
-        width: 72
-        height: 72
+        width: 46
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,20 +214,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3a57c5a01097624ea575ccb63e6b637
-      internalID: -431173975
+      spriteID: bb0bdfd276e5e16498f6b9d13a9ee997
+      internalID: 1964126558
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Big_bloated_attack1_5
+      name: Acid Explosion_5
       rect:
         serializedVersion: 2
-        x: 360
+        x: 230
         y: 0
-        width: 72
-        height: 72
+        width: 46
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,8 +235,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a51742e867ac7143adb80c6c77b9cbb
-      internalID: 1533933766
+      spriteID: 293040911b931b74090c7646d92afd5a
+      internalID: 647732446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Acid Explosion_6
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 0
+        width: 46
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a400e54788e85f488c685171d1874bb
+      internalID: 28246265
       vertices: []
       indices: 
       edges: []
@@ -252,12 +273,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Big_bloated_attack1_4: -431173975
-      Big_bloated_attack1_5: 1533933766
-      Big_bloated_attack1_1: -1318602710
-      Big_bloated_attack1_3: -416202505
-      Big_bloated_attack1_0: -1334783712
-      Big_bloated_attack1_2: 1454323305
+      Acid Explosion_1: -1557396139
+      Acid Explosion_0: 1640234489
+      Acid Explosion_4: 1964126558
+      Acid Explosion_2: -967756855
+      Acid Explosion_5: 647732446
+      Acid Explosion_3: -1004108292
+      Acid Explosion_6: 28246265
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -91,7 +91,7 @@ public class DamageControl : MonoBehaviour
         if(gameObject.name == "Player")
         {
             playerAnimation.SetHit();
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.42f);
             OnExitDamage.Invoke();
         }
 
@@ -109,7 +109,6 @@ public class DamageControl : MonoBehaviour
             timer += 0.1f;
         }
 
-        Debug.Log("leu");
         spriteRenderer.color = startColor;
     }
 
