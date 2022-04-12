@@ -20,4 +20,41 @@ public class BloatedAnimations : MonoBehaviour
         Anim.SetInteger("transition", moviment);
     }
 
+
+
+    public void SetMeleeAttack()
+    {
+        Anim.Play("Bloated_Attack4", -1);
+    }
+
+    public void  SetBoolIsAttacking( bool state)
+    {
+        Anim.SetBool("isAttacking", state);
+    }
+
+
+
+
+    public void SetRangedAttack1()
+    {
+        Anim.Play("Bloated_Attack1", -1);
+    }
+
+    public void SetRangedAttack2()
+    {
+        Anim.Play("Bloated_Attack3", -1);
+    }
+
+
+    public void SetHit()
+    {
+        Anim.Play("Bloated_Hurt", -1);
+    }
+
+
+    public void SetDeath()
+    {
+        Anim.Play("Bloated_Death", -1);
+    }
+
 }

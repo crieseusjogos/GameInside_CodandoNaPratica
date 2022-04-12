@@ -16,7 +16,7 @@ public class DamageControl : MonoBehaviour
 
 
     private bool invincible;
-    private bool isDead;
+    private bool _isDead;
 
     public UnityEvent OnDamage;
     public UnityEvent OnExitDamage;
@@ -24,6 +24,8 @@ public class DamageControl : MonoBehaviour
 
 
     PlayerAnimation playerAnimation;
+
+    public bool isDead { get => _isDead; set => _isDead = value; }
 
     private void Awake()
     {

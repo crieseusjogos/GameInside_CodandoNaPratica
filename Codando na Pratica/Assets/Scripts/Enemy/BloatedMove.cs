@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class BloatedMove : MonoBehaviour
 {
+
     private Rigidbody2D rb;
     private BloatedAnimations anim;
+    private BloatedActions actions;
 
     [SerializeField] private List<Transform> pointsMove = new List<Transform>();
     [SerializeField] private bool canMove;
@@ -20,19 +22,27 @@ public class BloatedMove : MonoBehaviour
 
     [SerializeField] private bool _canGetTarget;
 
+    [SerializeField] private bool _isAttack;
 
+    private bool _onHit;
+    private bool _isDead;
+
+ 
 
     #region Encapsulamento
 
     public bool canGetTarget { get => _canGetTarget; set => _canGetTarget = value; }
+    public bool isAttack { get => _isAttack; set => _isAttack = value; }
+    public bool onHit { get => _onHit; set => _onHit = value; }
+    public bool isDead { get => _isDead; set => _isDead = value; }
 
-
-    #endregion 
+    #endregion
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<BloatedAnimations>();
+        actions = GetComponent<BloatedActions>();
     }
 
     // Start is called before the first frame update
@@ -44,6 +54,9 @@ public class BloatedMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isAttack || onHit || isDead)
+            return;
+
         GoNewMovement();
         SetMovimentAnim(moveAnim);
     }
@@ -51,6 +64,10 @@ public class BloatedMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isAttack || onHit || isDead)
+            return;
+
+
         Move(moveState);
         CheckTargetPosition();
     }
@@ -134,13 +151,15 @@ public class BloatedMove : MonoBehaviour
     public void FinishMove()
     {
         moveState = 0;
+        moveAnim = 0;
         canMove = false;
         findTarget = false;
         canGetTarget = false;
 
         rb.velocity = Vector2.zero;
 
-        Invoke("StartLookingForPlayer", 0.1f);
+        actions.finishMoviment = true;
+        actions.Actions();
     }
 
 
