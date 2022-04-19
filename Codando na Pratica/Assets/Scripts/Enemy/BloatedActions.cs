@@ -6,27 +6,30 @@ public class BloatedActions : MonoBehaviour
 
 {
 
-    private BloatedMove move;
-    private BloatedAttack attacks;
-    private BloatedAnimations anim;
+    private BloatedMove move;              //Script de movimentação
+    private BloatedAttack attacks;         //Script de ataque
+    private BloatedAnimations anim;        //Script de animação
 
-    private BoxCollider2D boxCollider;
+    private BoxCollider2D boxCollider;     // Colisor 
 
-    [SerializeField] private Transform rayPoint;
-    [SerializeField] private float rayDistance;
+    [Header("Raycast Settings:")]
+    [SerializeField] private Transform rayPoint; // Raio para a visão do inimigo
+    [SerializeField] private float rayDistance;  // Tamanho do raio
 
-    [SerializeField] private bool _isAttacking;
-    [SerializeField] private bool _finishMoviment;
+    private bool _isAttacking;            // Controla se está atacando
+    private bool _finishMoviment;         // Controla se terminou a movimentação
+
+    private bool playerIsDead;            // Controla se o player está morto
+    private bool onHit;                   // Está tomando dano
+    private bool isDead;                  // Está morto
 
 
-
+    #region Encapsulamento
     public bool isAttacking { get => _isAttacking; set => _isAttacking = value; }
     public bool finishMoviment { get => _finishMoviment; set => _finishMoviment = value; }
 
-    private bool playerIsDead;
-    private bool onHit;
-    private bool isDead;
 
+    #endregion
 
     private void Awake()
     {
@@ -53,8 +56,9 @@ public class BloatedActions : MonoBehaviour
     }
 
 
+    #region Detectar o Player
 
-    void DetectPlayer()
+    void DetectPlayer()  // Função para detectar o Player, calcular sua distância e chamar o ataque 
     {
         if (isAttacking || playerIsDead || onHit || isDead)
             return;
@@ -63,11 +67,11 @@ public class BloatedActions : MonoBehaviour
 
         if(hit.collider != null)
         {
-            if(hit.transform.CompareTag("Player"))
+            if(hit.transform.CompareTag("Player")) // verifica se o objeto da colisão é o Player
             {
-                DamageControl damageControl = hit.transform.GetComponent<DamageControl>();
+                DamageControl damageControl = hit.transform.GetComponent<DamageControl>(); // Cria a linha de visão
 
-                if(damageControl.isDead)
+                if(damageControl.isDead) // retorna caso o Player esteja morto
                 {
                     playerIsDead = true;
                 }
@@ -75,53 +79,42 @@ public class BloatedActions : MonoBehaviour
                 if (playerIsDead)
                     return;
 
+                // Calcula a distância entre o ponto de colisão do Player na linha e o inimigo
+                float playerDistance = transform.position.x - hit.point.x; 
 
-                float playerDistance = transform.position.x - hit.point.x;
-                if(Mathf.Abs(playerDistance) <= 1f)
+                if(Mathf.Abs(playerDistance) <= 1f)  // Chama o ataque Corpo a corpo
                 {
-                    //Ataque Corpo a corpo
-                    Debug.Log("ataque corpo a corpo");
-
                     isAttacking = true;
                   
+                    move.FinishMove();               // Finalizando as funções de movimentação
+                    move.FinishLookingForPlayer();   // Finalizando as funções de movimentação
+                    move.isAttack = false;           // Finalizando as funções de movimentação
 
-                    move.FinishMove();
-                    move.FinishLookingForPlayer();
-                    move.isAttack = false;
-
-                    attacks.Meleeattack();
+                    attacks.Meleeattack();           // Chama função de Ataque Corpo a Corpo
 
                 }
-                else if(Mathf.Abs(playerDistance) > 1f)
+                else if(Mathf.Abs(playerDistance) > 1f)  // Chama o ataque a Distância
                 {
-                    //Ataque a distância
-                    Debug.Log("ataque a distância");
                     isAttacking = true;
 
-                    move.FinishMove();
-                    move.FinishLookingForPlayer();
-                    move.isAttack = false;
+                    move.FinishMove();                  // Finalizando as funções de movimentação
+                    move.FinishLookingForPlayer();      // Finalizando as funções de movimentação
+                    move.isAttack = false;              // Finalizando as funções de movimentação
 
 
-                    int randomAttack = Random.Range(0, 100);
+                    int randomAttack = Random.Range(0, 100);      // Seleciona um número Randômico para um ataque a Distância
+
                     if(randomAttack <= 50)
                     {
-                        attacks.RangedAttack1();
+                        attacks.RangedAttack1();              // Ataque 1
                     }
                     else if(randomAttack > 50)
                     {
-                        attacks.RangedAttack2();
+                        attacks.RangedAttack2();              // Ataque 2
                     }
-
-                   
-
                 }
-
-
             }
         }
-
-
     }
 
 
@@ -130,8 +123,12 @@ public class BloatedActions : MonoBehaviour
         Gizmos.DrawRay(rayPoint.position, Vector2.left * transform.localScale.x * rayDistance);
     }
 
+    #endregion
 
-    public void Actions()
+
+    #region Enemy Actions
+
+    public void Actions() // Verifica se não está atacando para chamar as funções de movimentação
     {
         if (onHit || isDead)
             return;
@@ -144,35 +141,40 @@ public class BloatedActions : MonoBehaviour
 
     }
 
-    void GoNewMove()
+    void GoNewMove() // Chama um novo movimento
     {
         if (isAttacking || onHit || isDead)
             return;
 
-        move.StartLookingForPlayer();
+        move.StartLookingForPlayer(); // Chama a função de procurar o player ao redor
     }
 
 
+    #endregion
 
-    public void OnHit()
+    #region Hit and Death
+
+    //Estas funções são chamadas pelo Script DamageControl através dos Events 
+
+    public void OnHit()  // Tomando o Dano 
     {
         onHit = true;
 
-        move.FinishMove();
-        move.FinishLookingForPlayer();
+        move.FinishMove();                //Finalizando funções de movimentação
+        move.FinishLookingForPlayer();    //Finalizando funções de movimentação
 
-        attacks.onHit = true;
-        move.onHit = true;
+        attacks.onHit = true;             // Travando os ataques  
+        move.onHit = true;                // Travando a movimentação    
 
-        anim.SetHit();
+        anim.SetHit();                    // Executa a animação
 
-        Invoke("ExitHit", 0.59f);
+        Invoke("ExitHit", 0.59f);         // Chama o fim da função Hit
     }
 
 
-    void ExitHit()
+    void ExitHit()  // Finaliza a função Hit
     {
-        onHit = false;
+        onHit = false;                  
         attacks.onHit = false;
         move.onHit = false;
 
@@ -180,19 +182,20 @@ public class BloatedActions : MonoBehaviour
     }
 
 
-    public void OnDeath()
+    public void OnDeath()   // Função de Morte
     {
         isDead = true;
-        boxCollider.enabled = false;
+        boxCollider.enabled = false;         // Desativa a colisão
 
-        move.FinishMove();
-        move.FinishLookingForPlayer();
+        move.FinishMove();                   // Finalizando funções de movimentação
+        move.FinishLookingForPlayer();       // Finalizando funções de movimentação
 
-        attacks.isDead = true;
-        move.isDead = true;
+        attacks.isDead = true;               // Travando os ataques  
+        move.isDead = true;                  // Travando a movimentação
 
-        anim.SetDeath();
+        anim.SetDeath();                     // Animação de Morte
     }
 
+    #endregion
 
 }

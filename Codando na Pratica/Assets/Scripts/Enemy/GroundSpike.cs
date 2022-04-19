@@ -13,7 +13,7 @@ public class GroundSpike : MonoBehaviour
     }
 
 
-    private void OnEnable()
+    private void OnEnable()   //Dá Play na animação ao ser ativado
     {
         anim.Play("Spike_Attack", -1);
     }

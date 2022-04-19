@@ -7,7 +7,10 @@ public class BloatedAnimations : MonoBehaviour
     [SerializeField] private Animator _anim;
 
 
+    #region Encapsulamento
     public Animator Anim { get => _anim; set => _anim = value; }
+
+    #endregion
 
     private void Awake()
     {
@@ -15,46 +18,54 @@ public class BloatedAnimations : MonoBehaviour
     }
 
 
-    public void SetMovimentAnim(int moviment)
+    #region Move
+
+    public void SetMovimentAnim(int moviment)      // Animação de movimentação
     {
         Anim.SetInteger("transition", moviment);
     }
 
+    #endregion
+
+    #region Attacks
 
 
-    public void SetMeleeAttack()
-    {
-        Anim.Play("Bloated_Attack4", -1);
-    }
-
-    public void  SetBoolIsAttacking( bool state)
+    public void SetBoolIsAttacking(bool state) // Transition de Ataque
     {
         Anim.SetBool("isAttacking", state);
     }
 
+    public void SetMeleeAttack()   // Animação de ataque corpo a corpo
+    {
+        Anim.Play("Bloated_Attack4", -1);
+    }
 
-
-
-    public void SetRangedAttack1()
+    public void SetRangedAttack1() // Ataque a distância 1
     {
         Anim.Play("Bloated_Attack1", -1);
     }
 
-    public void SetRangedAttack2()
+    public void SetRangedAttack2()  // Ataque a distância 2
     {
         Anim.Play("Bloated_Attack3", -1);
     }
 
+    #endregion
 
-    public void SetHit()
+    #region Hit and Death
+
+    public void SetHit()   // Animação de Dano
     {
         Anim.Play("Bloated_Hurt", -1);
     }
 
 
-    public void SetDeath()
+    public void SetDeath() // animação de Ataque 
     {
         Anim.Play("Bloated_Death", -1);
     }
+
+    #endregion
+
 
 }

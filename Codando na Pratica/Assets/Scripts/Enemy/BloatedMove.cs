@@ -5,27 +5,28 @@ using UnityEngine;
 public class BloatedMove : MonoBehaviour
 {
 
-    private Rigidbody2D rb;
-    private BloatedAnimations anim;
-    private BloatedActions actions;
+    private Rigidbody2D rb; 
 
-    [SerializeField] private List<Transform> pointsMove = new List<Transform>();
-    [SerializeField] private bool canMove;
-    [SerializeField] private float speed;
+    private BloatedAnimations anim;       // Script de Animação
+    private BloatedActions actions;       // Script de Ações
 
-    private Transform targetPosition;
-    private bool findTarget;
-    private int moveState;
-    private int moveAnim;
+    [Header("Moviment Settings:")]
+    [SerializeField] private List<Transform> pointsMove = new List<Transform>();    // Lista de pontos de movimentção 
+    [SerializeField] private float speed;                                           // Velocidade da movimentação
 
-    private bool right;
 
-    [SerializeField] private bool _canGetTarget;
+    private Transform targetPosition;    // Ponto alvo para se mover
+    private bool canMove;                // Pode se mover
+    private bool findTarget;             // Procurar um Alvo
+    private bool right;                  // Se está virado para a direita
+    private int moveState;               // Controla se está se movendo ou parado
+     private int moveAnim;                // Passa um valor para o Integger de transição de animação
+    
 
-    [SerializeField] private bool _isAttack;
-
-    private bool _onHit;
-    private bool _isDead;
+    private bool _canGetTarget;      // Pode buscar um novo alvo para se movimentar
+    private bool _isAttack;          // Está atacando
+    private bool _onHit;             // Tomou Dano
+    private bool _isDead;            // Está Morto 
 
  
 
@@ -48,7 +49,7 @@ public class BloatedMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        right = false;
+        right = false;  // Passar para false pois o sprite começa virado para a esquerda
     }
 
     // Update is called once per frame
@@ -57,8 +58,8 @@ public class BloatedMove : MonoBehaviour
         if (isAttack || onHit || isDead)
             return;
 
-        GoNewMovement();
-        SetMovimentAnim(moveAnim);
+        GoNewMovement();              //Função que seleciona um Alvo 
+        SetMovimentAnim(moveAnim);    // Seta as animações com um parametro int
     }
 
 
@@ -67,14 +68,14 @@ public class BloatedMove : MonoBehaviour
         if (isAttack || onHit || isDead)
             return;
 
-
-        Move(moveState);
-        CheckTargetPosition();
+        Move(moveState);         // Seta a direção de movimentação com um parametro int
+        CheckTargetPosition();   // Calcula a distância entre o inimigo e o ponto Alvo para se mover
     }
 
-    public void GoNewMovement()
-    {
+    #region Moviment
 
+    public void GoNewMovement()  // Seleciona um novo alvo para se mover
+    {
         if(canGetTarget)
         {
             canGetTarget = false;
@@ -86,39 +87,37 @@ public class BloatedMove : MonoBehaviour
 
 
 
-    void CheckTargetPosition()
+    void CheckTargetPosition() // Calcula constantemente a distância entre o inimigo e o Ponto Alvo
     {
-       if(findTarget)
+       if(findTarget)  // verifica se pode buscar um alvo
         {
 
-           if(targetPosition.position.x - transform.position.x > 0.02f)
-            {
-                //Direita
-                moveState = 1;
-                moveAnim = 1;
-                canMove = true;
+           if(targetPosition.position.x - transform.position.x > 0.02f)    //Direita
+            {  
+                moveState = 1;         // Está se movendo recebe 1
+                moveAnim = 1;          // Valor do transition de animação
+                canMove = true;        // Pode se mover
 
-                right = true;
-                Flip(false);
+                right = true;          // Virado para direita
+                Flip(false);           // Faz o flip no sprite do inimigo
             }
-           else if(targetPosition.position.x - transform.position.x < -0.02)
-            {
-                // Esquerda
-                moveState = 2;
-                moveAnim = 1;
-                canMove = true;
+           else if(targetPosition.position.x - transform.position.x < -0.02)    // Esquerda
+            {         
+                moveState = 2;         // Está se movendo recebe 1
+                moveAnim = 1;          // Valor do transition de animação
+                canMove = true;        // Pode se mover
 
-                right = false;
-                Flip(false);
+                right = false;         // Virado para a Esquerda
+                Flip(false);           // Faz o flip no sprite do inimigo, passa false para a bool onLooking
             }
-           else if(targetPosition.position.x - transform.position.x <= 0.02f && targetPosition.position.x - transform.position.x >= -0.02f)
+           else if(targetPosition.position.x - transform.position.x <= 0.02f && targetPosition.position.x - transform.position.x >= -0.02f)   // Chegou no alvo
             {
-                //Parar
-                moveState = 0;
-                moveAnim = 0;
+               
+                moveState = 0;          // Está se movendo recebe o
+                moveAnim = 0;           // Valor do transition de animação
 
-                rb.velocity = Vector2.zero;
-                Invoke("FinishMove", 0.01f);
+                rb.velocity = Vector2.zero;          // zera a velocidade do inimigo
+                Invoke("FinishMove", 0.01f);         // Finaliza o movimento, passa false para a bool onLooking
 
             }
 
@@ -126,13 +125,12 @@ public class BloatedMove : MonoBehaviour
     }
 
 
-    private void Move(int state)
+    private void Move(int state) // Passa a força e a direção do movimento
     {
-
         if (state == 0)
             return;
 
-        if(canMove)
+        if(canMove)  // Verifica se pode se mover
         {
             if (state == 1)
             {
@@ -143,14 +141,12 @@ public class BloatedMove : MonoBehaviour
                 rb.velocity = Vector2.left * speed;
             }
         }
-      
-
     }
 
 
-    public void FinishMove()
+    public void FinishMove()  // Finaliza a movimentãção
     {
-        moveState = 0;
+        moveState = 0;            
         moveAnim = 0;
         canMove = false;
         findTarget = false;
@@ -158,51 +154,55 @@ public class BloatedMove : MonoBehaviour
 
         rb.velocity = Vector2.zero;
 
-        actions.finishMoviment = true;
-        actions.Actions();
+        actions.finishMoviment = true;      // Passa o fim da movimentação para o Controlador de ações
+        actions.Actions();                  // Chama uma nova ação
     }
 
+    #endregion
 
 
-    void Flip(bool onLooking)
+    #region Flip
+
+    void Flip(bool onLooking)    // Faz o Flip no inimigo
     {
-
-        if(!onLooking)
+        if(!onLooking)           // faz o flip padrão
         {
-            Vector3 theScale = transform.localScale;
-            theScale.x = right ? -1 : 1;
-            transform.localScale = theScale;
+            Vector3 theScale = transform.localScale;          // Armazena a poisção atual
+            theScale.x = right ? -1 : 1;                      // verifica a direção em que está olhando
+            transform.localScale = theScale;                  // faz o Flip
 
         }
-        else if(onLooking)
+        else if(onLooking)      // Faz o flip da olhar ao redor buscando o Player
         {
-            int left = -1;
+            int left = -1;                             
             int right = 1;
-            int randoDirection = Random.Range(0, 100);
+            int randoDirection = Random.Range(0, 100);  // define um valor randomico para olhar
 
-            Vector3 theScale = transform.localScale;
-            theScale.x = randoDirection <= 50 ? left : right;
-            transform.localScale = theScale;
+            Vector3 theScale = transform.localScale;                // Armazena a poisção atual
+            theScale.x = randoDirection <= 50 ? left : right;       // verifica a direção em que está olhando
+            transform.localScale = theScale;                        // faz o Flip
 
         }
-
-
     }
 
+    #endregion
 
-    public void StartLookingForPlayer()
+
+    #region Looking For Player
+
+    public void StartLookingForPlayer()      // Inicia a corrotina de para olhar ao redor
     {
         StartCoroutine("LookingForThePlayer", 0.1f);
     }
 
-    public void FinishLookingForPlayer()
+    public void FinishLookingForPlayer()     // Finaliza a corrotina de olhar ao redor 
     {
         StopCoroutine("LookingForThePlayer");
     }
 
 
 
-    IEnumerator LookingForThePlayer()
+    IEnumerator LookingForThePlayer()       // Coortina qeu faz o inimigo olhar ao redor buscando o Player
     {
         Flip(true);
 
@@ -216,23 +216,22 @@ public class BloatedMove : MonoBehaviour
 
         yield return new WaitForSeconds(Random.Range(0.3f, 1.5f));
 
-        canGetTarget = true;
+        canGetTarget = true;               // Reinicia o ciclo de andar
     }
 
 
 
+    #endregion
 
 
-
-
-
+    #region Set Animation
 
     void SetMovimentAnim(int moviment)
     {
         anim.SetMovimentAnim(moviment);
     }
 
-
+    #endregion
 
 
 }

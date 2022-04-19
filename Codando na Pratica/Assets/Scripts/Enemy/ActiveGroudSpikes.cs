@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class ActiveGroudSpikes : MonoBehaviour
 {
-
-    [SerializeField] private GameObject[] leftSpikes;
-    [SerializeField] private GameObject[] rightSpikes;
-
+    [Header("Spikes Settings:")]
+    [SerializeField] private GameObject[] leftSpikes; // Conjunto de espinhos que avança para a esquerda
+    [SerializeField] private GameObject[] rightSpikes; // Conjunto de espinhos que avança para a direita
     [SerializeField] private float activeNextSpike;
 
 
@@ -21,8 +20,9 @@ public class ActiveGroudSpikes : MonoBehaviour
 
     }
 
-   
-    IEnumerator LeftSpike()
+    #region Active Spikes
+
+    IEnumerator LeftSpike() // Ativa em sequência os espinhos da esquerda
     {
         int i = 0;
 
@@ -37,7 +37,7 @@ public class ActiveGroudSpikes : MonoBehaviour
     }
 
 
-    IEnumerator RightSpike()
+    IEnumerator RightSpike() // Ativa em sequência os espinhos da direita
     {
         int i = 0;
 
@@ -52,6 +52,6 @@ public class ActiveGroudSpikes : MonoBehaviour
     }
 
 
-
+    #endregion
 
 }

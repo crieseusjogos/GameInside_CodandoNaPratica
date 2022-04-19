@@ -5,11 +5,13 @@ using UnityEngine.Events;
 
 public class DamageControl : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    [Header("Select Damage Color:")]
     [SerializeField] private Color damageColor;
 
+    private SpriteRenderer spriteRenderer;
     private Color startColor;
 
+    [Header("Health Settings:")]
     [SerializeField] private int maxHealth;
     [SerializeField] private int currentHealth;
     [SerializeField] private float invincibleTime;
@@ -18,6 +20,7 @@ public class DamageControl : MonoBehaviour
     private bool invincible;
     private bool _isDead;
 
+    [Header("Envents Settings:")]
     public UnityEvent OnDamage;
     public UnityEvent OnExitDamage;
     public UnityEvent OnDeath;
@@ -25,7 +28,11 @@ public class DamageControl : MonoBehaviour
 
     PlayerAnimation playerAnimation;
 
+    #region Encapsuloamento
+
     public bool isDead { get => _isDead; set => _isDead = value; }
+
+    #endregion
 
     private void Awake()
     {
@@ -54,8 +61,9 @@ public class DamageControl : MonoBehaviour
     }
 
 
+    #region Take Damage
 
-    public void TakeDamage(int currentDamage)
+    public void TakeDamage(int currentDamage) // Função que recebe o dano
     {
        if (isDead || invincible)
             return;
@@ -76,19 +84,22 @@ public class DamageControl : MonoBehaviour
        Invoke("FinishInvincible", invincibleTime);
     }
 
-    void FinishInvincible()
+    void FinishInvincible() // Função finaliza a Invencibilidade
     {
         invincible = false;
     }
 
+    #endregion
 
 
-    public void StartInvincibleTransparence()
+    #region Invincible
+
+    public void StartInvincibleTransparence() // Função que inicia a corrotina de invencibilidade
     {
         StartCoroutine(ShowInvincibleTransparence());
     }
 
-    IEnumerator ShowInvincibleTransparence()
+    IEnumerator ShowInvincibleTransparence()  // faz a Invencibilidade e executa o feedback no Sprite
     {
         if(gameObject.name == "Player")
         {
@@ -113,6 +124,6 @@ public class DamageControl : MonoBehaviour
 
         spriteRenderer.color = startColor;
     }
-
+#endregion
 
 }

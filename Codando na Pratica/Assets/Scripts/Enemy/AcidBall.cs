@@ -16,6 +16,8 @@ public class AcidBall : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        //Detecta a colisão com a Layer Player, Player Attack e Ground, para executar a explosão.
+
         if(other.gameObject.layer == 3 || other.gameObject.layer == 6 || other.gameObject.layer == 7)
         {
             rb.velocity = Vector2.zero;
