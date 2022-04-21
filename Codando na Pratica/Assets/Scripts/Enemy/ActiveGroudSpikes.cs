@@ -7,16 +7,18 @@ public class ActiveGroudSpikes : MonoBehaviour
     [Header("Spikes Settings:")]
     [SerializeField] private GameObject[] leftSpikes; // Conjunto de espinhos que avança para a esquerda
     [SerializeField] private GameObject[] rightSpikes; // Conjunto de espinhos que avança para a direita
-    [SerializeField] private float activeNextSpike;
+    [SerializeField] private float activeNextSpike;    // Tempo esperado para ativar o próximo espinho
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        // Inicia a ativação dos espinhos
+
         StartCoroutine("LeftSpike", 0.1f);
         StartCoroutine("RightSpike", 0.1f);
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 5f);             // Destroy os espinhos após todos serem ativados.
 
     }
 
