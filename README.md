@@ -39,13 +39,12 @@ Cronograma
 3. Animações
 4. Inimigos
 5. Camera e cenário
-6.  Batalhas
-7. Inimigo com BehaviourThree.
+
 
 Definições gerais
 plataforma 2D;
 Pc;
 2 Cenas;
-2 Inimigos;
+1 Inimigo;
 Para todos os públicos;
 Plataforma;
